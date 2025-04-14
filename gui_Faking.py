@@ -10,16 +10,15 @@ import serial.tools.list_ports
 ser = serial.Serial()
 
 class UARTGUI(QWidget):
-    new_bit = 0
 
     def __init__(self):
         super().__init__()
         self.setup_ui()
         self.serial_port = None
         self.timer = QTimer(self)  # Timer for generating bitstream
+        self.timer2 = QTimer(self)
         self.timer.timeout.connect(self.generate_random_bitstream)
-        self.receive_timer = QTimer(self)  # Timer for listening to incoming data
-        self.receive_timer.timeout.connect(self.listen_for_data)  # Connect to the listening function
+        self.timer2.timeout.connect(self.read_encoded_bits)
         self.file_cursor = 0  # Initialize the cursor position
         self.file_path = "encoded_input.txt"  # File path to read from
 
@@ -72,7 +71,6 @@ class UARTGUI(QWidget):
 
         # Button to connect/disconnect UART
         self.connect_button = QPushButton("Connect")
-        self.connect_button.clicked.connect(self.connect_uart)
         port_settings_layout.addWidget(self.connect_button)
 
         # Baud rate label and input field
@@ -136,35 +134,33 @@ class UARTGUI(QWidget):
         self.setLayout(main_layout)
 
     def start_bitstream_generation(self):
-        if ser.is_open:
-            self.timer.start(200)  # Start timer with interval of 500 ms
-        else:
-            QMessageBox.warning(self, "Warning", "Serial port is not connected. Please connect to a port first.")
-            
+        self.timer.start(200)  # Start timer with interval of 500 ms
+        self.timer2.start(100)  # Start timer with interval of 500 ms
+
     def stop_bitstream_generation(self):
         self.timer.stop()  # Stop the timer
+        self.timer2.stop()  # Stop the timer
 
     def generate_random_bitstream(self):
-        new_bit = random.choice('01')  # Generate a single random bit
-        ser.write(new_bit.encode())  # Send the bit over UART
-        bitstream = ''.join(new_bit)  # Generate a single random bit
-        current_text_input = self.input_text_area.toPlainText()
+        bitstream = ''.join(random.choice('01') for _ in range(1))  # Generate a single random bit
+        current_text_input = self.input_text_area.toPlainText()  # Get the existing input text
         self.input_text_area.setPlainText(current_text_input + bitstream)  # Append new bitstream to the input area
+        self.received_text_area.setPlainText(current_text_input + bitstream)  # Append new bitstream to the input area
 
-        # # Simulate decoding with possible error
-        # decoded_bit = bitstream
-        # if random.randrange(0, 99) > 90:  # Introduce an error with 10% probability
-        #     decoded_bit = '0' if bitstream == '1' else '1'
+        # Simulate decoding with possible error
+        decoded_bit = bitstream
+        if random.randrange(0, 99) > 90:  # Introduce an error with 10% probability
+            decoded_bit = '0' if bitstream == '1' else '1'
 
-        # # Update decoded text with highlighting
-        # cursor = self.decoded_text_area.textCursor()
-        # cursor.movePosition(cursor.End)  # Move cursor to the end of text
-        # if decoded_bit != bitstream:
-        #     cursor.insertHtml(f'<span style="color:red;">{decoded_bit}</span>')  # Highlight mismatch in red
-        # else:
-        #     cursor.insertHtml(f'<span style="color:white;">{decoded_bit}</span>')  # Append matching bit in white
-        # self.decoded_text_area.setTextCursor(cursor)  # Set updated cursor back
-        # self.decoded_text_area.ensureCursorVisible()  # Keep cursor visible
+        # Update decoded text with highlighting
+        cursor = self.decoded_text_area.textCursor()
+        cursor.movePosition(cursor.End)  # Move cursor to the end of text
+        if decoded_bit != bitstream:
+            cursor.insertHtml(f'<span style="color:red;">{decoded_bit}</span>')  # Highlight mismatch in red
+        else:
+            cursor.insertHtml(f'<span style="color:white;">{decoded_bit}</span>')  # Append matching bit in white
+        self.decoded_text_area.setTextCursor(cursor)  # Set updated cursor back
+        self.decoded_text_area.ensureCursorVisible()  # Keep cursor visible
 
     def read_encoded_bits(self):
         try:
@@ -219,24 +215,12 @@ class UARTGUI(QWidget):
             if ser.is_open:
                 self.log_message("Serial Port Opened")
                 self.connect_button.setText("Disconnect")
-                self.receive_timer.start(100)  # Start listening for data every 100ms
             else:
                 self.log_message("Failed to open Serial Port")
         else:
             ser.close()
             self.connect_button.setText("Connect")
             self.log_message("Disconnected from port")
-            self.receive_timer.stop()  # Stop listening for data
-
-    def listen_for_data(self):
-        """Listen for incoming data from the serial port."""
-        if ser.is_open and ser.in_waiting > 0:  # Check if data is available
-            try:
-                data = ser.read(ser.in_waiting).decode('utf-8')  # Read available data
-                current_text = self.received_text_area.toPlainText()
-                self.received_text_area.setPlainText(current_text + data)  # Append received data to the UI
-            except Exception as e:
-                self.log_message(f"Error reading data: {str(e)}")
 
     def eventFilter(self, source, event):
         if event.type() == QEvent.MouseButtonPress and source == self.port_combobox:
