@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7s25csga324-1" LaunchTime="1744654778" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/CCED.dcp">
-  <File Type="PA-TCL" Name="uartOnly.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="uartOnly_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="uartOnly_reports.tcl"/>
-  <File Type="RDS-RDS" Name="uartOnly.vds"/>
-  <File Type="RDS-UTIL" Name="uartOnly_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="uartOnly_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="uartOnly.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="uartOnly_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="uartOnly_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7s25csga324-1" LaunchTime="1744662907" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/CCED.dcp">
+  <File Type="PA-TCL" Name="uartWencode.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="uartWencode_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="uartWencode_reports.tcl"/>
+  <File Type="RDS-RDS" Name="uartWencode.vds"/>
+  <File Type="RDS-UTIL" Name="uartWencode_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="uartWencode_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="uartWencode.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="uartWencode_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="uartWencode_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/encoder.v">
+      <FileInfo SFType="SVerilog">
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/UART.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/uartWencode.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -19,6 +32,7 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/uartOnly.vhd">
       <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -37,17 +51,17 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/encoder.v">
-      <FileInfo SFType="SVerilog">
-        <Attr Name="UserDisabled" Val="1"/>
+    <File Path="$PSRCDIR/sources_1/new/Ram.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="uartOnly"/>
+      <Option Name="TopModule" Val="uartWencode"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

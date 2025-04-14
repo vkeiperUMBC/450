@@ -22,6 +22,7 @@ class UARTGUI(QWidget):
         self.receive_timer.timeout.connect(self.listen_for_data)  # Connect to the listening function
         self.file_cursor = 0  # Initialize the cursor position
         self.file_path = "encoded_input.txt"  # File path to read from
+        self.bit_buffer = ""  # Buffer to store received bits
 
 
     def setup_ui(self):
@@ -232,11 +233,34 @@ class UARTGUI(QWidget):
         """Listen for incoming data from the serial port."""
         if ser.is_open and ser.in_waiting > 0:  # Check if data is available
             try:
-                data = ser.read(ser.in_waiting).decode('utf-8')  # Read available data
-                current_text = self.received_text_area.toPlainText()
-                self.received_text_area.setPlainText(current_text + data)  # Append received data to the UI
+                data = ser.read(ser.in_waiting)  # Read available data as raw bytes
+                self.bit_buffer += ''.join(format(byte, '08b') for byte in data)  # Convert bytes to raw bits
+
+                # Process the buffer in chunks of 4 bits
+                while len(self.bit_buffer) >= 4:
+                    chunk = self.bit_buffer[:4]  # Take the first 4 bits
+                    self.bit_buffer = self.bit_buffer[4:]  # Remove the processed bits from the buffer
+
+                    # Display the bits in the respective sections
+                    self.update_ui_with_bits(chunk)
+
             except Exception as e:
                 self.log_message(f"Error reading data: {str(e)}")
+
+    def update_ui_with_bits(self, chunk):
+        """Update the UI with the received bits in a cycle of 4."""
+        if len(chunk) == 4:
+            # 1st bit to the "Received" section
+            current_received = self.received_text_area.toPlainText()
+            self.received_text_area.setPlainText(current_received + chunk[0])
+
+            # Next 2 bits to the "Encoded" section
+            current_encoded = self.encoded_text_area.toPlainText()
+            self.encoded_text_area.setPlainText(current_encoded + chunk[1:3])
+
+            # Last bit to the "Decoded" section
+            current_decoded = self.decoded_text_area.toPlainText()
+            self.decoded_text_area.setPlainText(current_decoded + chunk[3])
 
     def eventFilter(self, source, event):
         if event.type() == QEvent.MouseButtonPress and source == self.port_combobox:

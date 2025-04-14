@@ -41,4 +41,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log uartOnly.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source uartOnly.tcl
+EAStep vivado -log uartWencode.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source uartWencode.tcl

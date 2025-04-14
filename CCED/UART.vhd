@@ -56,7 +56,7 @@ begin
       elsif RxBaudCount /= 0 then
         RxBaudCount <= RxBaudCount - 1; -- Countdown 
       end if;
-      if TxStart = '1' then -- Four UART Transmitter
+      if TxStart = '1' then -- For UART Transmitter
         TxBaudCount <= to_unsigned(Baud10, 17);
       elsif TxBaudCount /= 0 then
         TxBaudCount <= TxBaudCount - 1; -- Countdown

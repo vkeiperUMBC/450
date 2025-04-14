@@ -1,92 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7s25csga324-1" LaunchTime="1744654829">
-  <File Type="ROUTE-PWR" Name="uartOnly_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="uartOnly.tcl"/>
-  <File Type="ROUTE-PWR-SUM" Name="uartOnly_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="uartOnly_reports.tcl"/>
-  <File Type="OPT-RQA-PB" Name="uartOnly_rqa_opted.pb"/>
-  <File Type="BITSTR-MMI" Name="uartOnly.mmi"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="uartOnly_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="uartOnly_timing_summary_init.rpt"/>
-  <File Type="OPT-TIMING" Name="uartOnly_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="uartOnly_opt.dcp"/>
-  <File Type="OPT-DRC" Name="uartOnly_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="uartOnly.hwdef"/>
-  <File Type="PWROPT-DCP" Name="uartOnly_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="uartOnly_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="uartOnly_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="uartOnly_placed.dcp"/>
-  <File Type="PLACE-IO" Name="uartOnly_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="uartOnly_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="uartOnly_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="uartOnly_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="uartOnly_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="uartOnly_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="uartOnly_incremental_reuse_pre_placed.rpt"/>
-  <File Type="BG-BIN" Name="uartOnly.bin"/>
-  <File Type="PLACE-TIMING" Name="uartOnly_timing_summary_placed.rpt"/>
-  <File Type="ROUTE-PWR-RPX" Name="uartOnly_power_routed.rpx"/>
-  <File Type="PLACE-RQA-PB" Name="uartOnly_rqa_placed.pb"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="uartOnly_postplace_pwropt.dcp"/>
-  <File Type="BITSTR-MSK" Name="uartOnly.msk"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="uartOnly_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="uartOnly_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="uartOnly_drc_physopted.rpt"/>
-  <File Type="BITSTR-RBT" Name="uartOnly.rbt"/>
-  <File Type="PHYSOPT-TIMING" Name="uartOnly_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="uartOnly_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="uartOnly_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="uartOnly_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="uartOnly_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="uartOnly_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="uartOnly_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="uartOnly_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="uartOnly_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="uartOnly_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-RQS-PB" Name="uartOnly_rqs_routed.pb"/>
-  <File Type="ROUTE-STATUS" Name="uartOnly_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="uartOnly_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="uartOnly_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="uartOnly_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="uartOnly_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="uartOnly_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="uartOnly_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="uartOnly_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="uartOnly_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="uartOnly_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="uartOnly_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="uartOnly_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="uartOnly_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="uartOnly_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="uartOnly_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="uartOnly_bus_skew_postroute_physopted.rpt"/>
-  <File Type="BG-BIT" Name="uartOnly.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="uartOnly_bus_skew_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="uartOnly_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-NKY" Name="uartOnly.nky"/>
-  <File Type="BITSTR-BMM" Name="uartOnly_bd.bmm"/>
-  <File Type="PDI-FILE" Name="uartOnly.pdi"/>
-  <File Type="BOOT-PDI-FILE" Name="uartOnly_soc.pdi"/>
-  <File Type="PL-PDI-FILE" Name="uartOnly_pld.pdi"/>
-  <File Type="RCFI_FILE" Name="uartOnly.rcfi"/>
-  <File Type="CFI_FILE" Name="uartOnly.cfi"/>
-  <File Type="RNPI_FILE" Name="uartOnly.rnpi"/>
-  <File Type="NPI_FILE" Name="uartOnly.npi"/>
-  <File Type="RBD_FILE" Name="uartOnly.rbd"/>
+<GenRun Id="impl_1" LaunchPart="xc7s25csga324-1" LaunchTime="1744662942">
+  <File Type="ROUTE-PWR" Name="uartWencode_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="uartWencode.tcl"/>
+  <File Type="ROUTE-PWR-SUM" Name="uartWencode_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="uartWencode_reports.tcl"/>
+  <File Type="OPT-RQA-PB" Name="uartWencode_rqa_opted.pb"/>
+  <File Type="BITSTR-MMI" Name="uartWencode.mmi"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="uartWencode_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="uartWencode_timing_summary_init.rpt"/>
+  <File Type="OPT-TIMING" Name="uartWencode_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="uartWencode_opt.dcp"/>
+  <File Type="OPT-DRC" Name="uartWencode_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="uartWencode.hwdef"/>
+  <File Type="PWROPT-DCP" Name="uartWencode_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="uartWencode_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="uartWencode_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="uartWencode_placed.dcp"/>
+  <File Type="PLACE-IO" Name="uartWencode_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="uartWencode_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="uartWencode_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="uartWencode_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="uartWencode_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="uartWencode_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="uartWencode_incremental_reuse_pre_placed.rpt"/>
+  <File Type="BG-BIN" Name="uartWencode.bin"/>
+  <File Type="PLACE-TIMING" Name="uartWencode_timing_summary_placed.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="uartWencode_power_routed.rpx"/>
+  <File Type="PLACE-RQA-PB" Name="uartWencode_rqa_placed.pb"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="uartWencode_postplace_pwropt.dcp"/>
+  <File Type="BITSTR-MSK" Name="uartWencode.msk"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="uartWencode_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="uartWencode_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="uartWencode_drc_physopted.rpt"/>
+  <File Type="BITSTR-RBT" Name="uartWencode.rbt"/>
+  <File Type="PHYSOPT-TIMING" Name="uartWencode_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="uartWencode_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="uartWencode_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="uartWencode_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="uartWencode_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="uartWencode_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="uartWencode_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="uartWencode_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="uartWencode_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="uartWencode_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-RQS-PB" Name="uartWencode_rqs_routed.pb"/>
+  <File Type="ROUTE-STATUS" Name="uartWencode_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="uartWencode_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="uartWencode_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="uartWencode_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="uartWencode_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="uartWencode_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="uartWencode_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="uartWencode_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="uartWencode_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="uartWencode_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="uartWencode_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="uartWencode_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="uartWencode_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="uartWencode_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="uartWencode_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="uartWencode_bus_skew_postroute_physopted.rpt"/>
+  <File Type="BG-BIT" Name="uartWencode.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="uartWencode_bus_skew_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="uartWencode_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-NKY" Name="uartWencode.nky"/>
+  <File Type="BITSTR-BMM" Name="uartWencode_bd.bmm"/>
+  <File Type="PDI-FILE" Name="uartWencode.pdi"/>
+  <File Type="BOOT-PDI-FILE" Name="uartWencode_soc.pdi"/>
+  <File Type="PL-PDI-FILE" Name="uartWencode_pld.pdi"/>
+  <File Type="RCFI_FILE" Name="uartWencode.rcfi"/>
+  <File Type="CFI_FILE" Name="uartWencode.cfi"/>
+  <File Type="RNPI_FILE" Name="uartWencode.rnpi"/>
+  <File Type="NPI_FILE" Name="uartWencode.npi"/>
+  <File Type="RBD_FILE" Name="uartWencode.rbd"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="uartOnly.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="uartOnly.sysdef"/>
-  <File Type="BG-BGN" Name="uartOnly.bgn"/>
-  <File Type="BG-DRC" Name="uartOnly.drc"/>
-  <File Type="RDI-RDI" Name="uartOnly.vdi"/>
+  <File Type="BITSTR-LTX" Name="uartWencode.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="uartWencode.sysdef"/>
+  <File Type="BG-BGN" Name="uartWencode.bgn"/>
+  <File Type="BG-DRC" Name="uartWencode.drc"/>
+  <File Type="RDI-RDI" Name="uartWencode.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="ROUTE-RQS" Name="uartOnly_routed.rqs"/>
-  <File Type="POSTROUTE-PHYSOPT-RQS" Name="uartOnly_postroute_physopted.rqs"/>
+  <File Type="ROUTE-RQS" Name="uartWencode_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="uartWencode_postroute_physopted.rqs"/>
   <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
   <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/encoder.v">
+      <FileInfo SFType="SVerilog">
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/UART.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/uartWencode.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -94,6 +107,7 @@
     </File>
     <File Path="$PSRCDIR/sources_1/new/uartOnly.vhd">
       <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
@@ -112,17 +126,17 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/encoder.v">
-      <FileInfo SFType="SVerilog">
-        <Attr Name="UserDisabled" Val="1"/>
+    <File Path="$PSRCDIR/sources_1/new/Ram.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="uartOnly"/>
+      <Option Name="TopModule" Val="uartWencode"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
