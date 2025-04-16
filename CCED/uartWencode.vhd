@@ -58,7 +58,10 @@ architecture Behavioral of uartWencode is
             encoded_out1   : out std_logic
         );
     end component;
-
+    
+    signal encoderEnableIt : std_logic_vector(3 downto 0);
+--    signal encoderEnableIt : std_logic_vector(3 downto 0);
+    
 begin
 
     -- UART instance
@@ -121,6 +124,16 @@ begin
                 bitIndex    <= 0;
             end if;
         end if;
+    end process;
+    
+    process(sRxDataRdy)
+    begin
+        if rising_edge(sRxDataRdy) then
+            while encoderEnableIt < "4" loop
+            
+            end loop;
+        end if;
+    
     end process;
 
 end Behavioral;

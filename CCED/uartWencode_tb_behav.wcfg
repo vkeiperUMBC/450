@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1,009,513.906 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,009,806.307 ns"></ZoomEndTime>
-      <Cursor1Time time="1,009,579.706 ns"></Cursor1Time>
+      <ZoomStartTime time="1,009,013.691 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,009,939.692 ns"></ZoomEndTime>
+      <Cursor1Time time="1,009,579.691 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="124"></NameColumnWidth>
-      <ValueColumnWidth column_width="85"></ValueColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/uartWencode_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -63,11 +63,14 @@
    <wvobject fp_name="/uartWencode_tb/uut/sTxData" type="array">
       <obj_property name="ElementShortName">sTxData[7:0]</obj_property>
       <obj_property name="ObjectShortName">sTxData[7:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
    </wvobject>
    <wvobject fp_name="/uartWencode_tb/uut/sRxData" type="array">
       <obj_property name="ElementShortName">sRxData[7:0]</obj_property>
       <obj_property name="ObjectShortName">sRxData[7:0]</obj_property>
       <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/uartWencode_tb/sim_done" type="other">
+      <obj_property name="ElementShortName">sim_done</obj_property>
+      <obj_property name="ObjectShortName">sim_done</obj_property>
    </wvobject>
 </wave_config>
