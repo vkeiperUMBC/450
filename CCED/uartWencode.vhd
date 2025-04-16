@@ -82,7 +82,7 @@ begin
         RST            => BTN0,
         data_in        => sRxData(0),
         in_enable      => sRxDataRdy,
-        out_enable     => '1',
+        out_enable     => sRxDataRdy,
         constraint_sel => SW,
         encoded_out0   => enOut_0,
         encoded_out1   => enOut_1

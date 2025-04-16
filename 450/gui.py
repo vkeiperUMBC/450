@@ -24,6 +24,11 @@ class UARTGUI(QWidget):
         self.file_path = "encoded_input.txt"  # File path to read from
         self.bit_buffer = ""  # Buffer to store received bits
 
+        # Set the initial size of the window to maintain a 4:3 aspect ratio
+        screenSize = QApplication.primaryScreen().size()
+        screenWidth = screenSize.width()
+        screenHeight = screenSize.height()
+        self.setGeometry(int((screenWidth / 2) - 200), int((screenHeight / 2) - 200), int(400), int(300))  # x, y, width, height (4:3 aspect ratio)
 
     def setup_ui(self):
         self.setWindowTitle('CCED GUI')

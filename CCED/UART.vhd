@@ -5,17 +5,17 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity UART is 
-  Port
-  ( CLK         : in std_logic;
-    RST         : in std_logic;
-    UART_TXD_IN : in std_logic;
-    TxStart     : in std_logic;
-    TxData      : in std_logic_vector(7 downto 0);--_vector(3 downto 0);
-    
-    RxDataRdy    : out std_logic;
-    RxData       : out std_logic_vector(7 downto 0);
-    TxBusy       : out std_logic;
-    UART_RXD_OUT : out std_logic
+  Port (
+    CLK          : in  std_logic;                     -- System clock input
+    RST          : in  std_logic;                     -- Asynchronous reset input (active high)
+    UART_TXD_IN  : in  std_logic;                     -- Serial data input from external UART transmitter
+    TxStart      : in  std_logic;                     -- Signal to trigger UART transmission
+    TxData       : in  std_logic_vector(7 downto 0);  -- Parallel data to be transmitted (8-bit)
+
+    RxDataRdy    : out std_logic;                     -- Indicates that a new byte has been received and is ready
+    RxData       : out std_logic_vector(7 downto 0);  -- Received parallel data (8-bit)
+    TxBusy       : out std_logic;                     -- Indicates UART transmitter is currently busy
+    UART_RXD_OUT : out std_logic                      -- Serial data output to external UART receiver
   );
 end UART;
 
