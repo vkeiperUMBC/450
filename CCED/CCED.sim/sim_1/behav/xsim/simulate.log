@@ -1,0 +1,5 @@
+Time resolution is 1 ps
+Note: Test case 1: K=3 constraint (00), sending '1'
+Time: 20 us  Iteration: 0  Process: /uartWencode_tb/stim_proc  File: C:/Users/keipe/Documents/capstone/450/CCED/CCED.srcs/sim_1/new/uartWencode_tb.vhd
+Note: Simulation complete
+Time: 2624175 ns  Iteration: 0  Process: /uartWencode_tb/stim_proc  File: C:/Users/keipe/Documents/capstone/450/CCED/CCED.srcs/sim_1/new/uartWencode_tb.vhd

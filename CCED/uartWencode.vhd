@@ -81,7 +81,7 @@ begin
         CLK            => CLK100MHZ,
         RST            => BTN0,
         data_in        => sRxData(0),
-        in_enable      => sRxDataRdy,
+        in_enable      => '1',
         out_enable     => '1',
         constraint_sel => SW,
         encoded_out0   => enOut_0,
