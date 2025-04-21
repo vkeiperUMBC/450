@@ -96,10 +96,10 @@ begin
         -- Test case 1: Send '1' with K=3 constraint (00)
         report "Test case 1: K=3 constraint (00), sending '1'";
         uart_send_byte(x"01", uart_tx_in); -- Send byte with LSB = '1'
+        wait for 10 * BIT_PERIOD;
         uart_send_byte(x"00", uart_tx_in); -- Send byte with LSB = '1'
 
         -- Wait for the encoding process and response
-        wait for 5 * BIT_PERIOD;
 
         -- End simulation
         report "Simulation complete";

@@ -1,7 +1,4 @@
-Running: xsim.dir/uartWencode_tb_behav/xsimk.exe -simmode gui -wdb uartWencode_tb_behav.wdb -simrunnum 0 -socket 65229
+Running: xsim.dir/uartWencode_tb_behav/xsimk.exe -simmode gui -wdb uartWencode_tb_behav.wdb -simrunnum 0 -socket 56998
 Design successfully loaded
-Design Loading Memory Usage: 9724 KB (Peak: 9724 KB)
-Design Loading CPU Usage: 30 ms
-Simulation completed
-Simulation Memory Usage: 18488 KB (Peak: 18488 KB)
-Simulation CPU Usage: 1734 ms
+Design Loading Memory Usage: 9744 KB (Peak: 9744 KB)
+Design Loading CPU Usage: 31 ms

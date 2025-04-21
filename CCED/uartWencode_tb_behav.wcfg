@@ -13,13 +13,13 @@
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
       <ZoomEndTime time="3,501.000001 us"></ZoomEndTime>
-      <Cursor1Time time="1,046.909201 us"></Cursor1Time>
+      <Cursor1Time time="2,100.600000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="124"></NameColumnWidth>
-      <ValueColumnWidth column_width="81"></ValueColumnWidth>
+      <ValueColumnWidth column_width="77"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="13" />
    <wvobject fp_name="/uartWencode_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -67,5 +67,10 @@
    <wvobject fp_name="/uartWencode_tb/uut/Encoder/encoded_out1" type="logic">
       <obj_property name="ElementShortName">encoded_out1</obj_property>
       <obj_property name="ObjectShortName">encoded_out1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uartWencode_tb/uut/txDataBuffer" type="array">
+      <obj_property name="ElementShortName">txDataBuffer[7:0]</obj_property>
+      <obj_property name="ObjectShortName">txDataBuffer[7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
    </wvobject>
 </wave_config>

@@ -31,6 +31,8 @@ architecture Behavioral of uartWencode is
     signal bitIndex     : integer range 0 to 7 := 0;
     signal encdDone     : std_logic := '0';
     signal nbblIndx     : std_logic := '0';
+    signal recCheck     : std_logic := '0';
+    signal enCheck      : std_logic := '0';
     
 
     -- UART component
@@ -105,7 +107,6 @@ begin
             sTxStart <= '0';  -- default low unless triggered
     
             txDataBuffer(3) <= '0';
-            txDataBuffer(7) <= '0';
 
             -- When a new byte is received over UART
             if sRxDataRdy = '1' then
@@ -113,24 +114,16 @@ begin
             end if;
             
             if encdDone = '1' then
-                txDataBuffer(1 + bitIndex) <= enOut_0;
-                txDataBuffer(2 + bitIndex) <= enOut_1;
-                encodeCount <= encodeCount + 1;
+                txDataBuffer(1) <= enOut_0;
+                txDataBuffer(2) <= enOut_1;
             end if;
             
-            if encodeCount = 1 then
-                bitIndex <= 4;
-            else
-                bitIndex <= 0;
-            end if;
-
-            -- When 2 sets of 4 bits have been written, transmit
-            if encodeCount = 2 then
-                sTxData     <= txDataBuffer;
-                sTxStart    <= '1';            -- trigger UART transmit
-                encodeCount <= 0;              -- reset for next frame
-                bitIndex    <= 0;
-            end if;
+            if recCheck = '1' and enCheck = '1' then
+                recCheck <= '0';
+                enCheck <= '0';
+                sTxStart <= '1';
+            end if; 
+            
         end if;
     end process;
 
