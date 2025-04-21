@@ -29,6 +29,9 @@ architecture Behavioral of uartWencode is
     signal txDataBuffer : std_logic_vector(7 downto 0) := (others => '0');
     signal encodeCount  : integer range 0 to 2 := 0;
     signal bitIndex     : integer range 0 to 7 := 0;
+    signal encdDone     : std_logic := '0';
+    signal nbblIndx     : std_logic := '0';
+    
 
     -- UART component
     component UART is 
@@ -46,13 +49,13 @@ architecture Behavioral of uartWencode is
     end component;
 
     -- Encoder component
-    component encoder_k3 is
+    component encoder is
         port (
             CLK            : in  std_logic;
             RST            : in  std_logic;
             data_in        : in  std_logic;
             in_enable      : in  std_logic;
-            out_enable     : in  std_logic;
+            out_enable     : out  std_logic;
             constraint_sel : in  std_logic_vector(1 downto 0);
             encoded_out0   : out std_logic;
             encoded_out1   : out std_logic
@@ -76,13 +79,13 @@ begin
     );
 
     -- Encoder instance
-    Encoder : encoder_k3
+    Encoder0 : encoder
     port map (
         CLK            => CLK100MHZ,
         RST            => BTN0,
         data_in        => sRxData(0),
         in_enable      => '1',
-        out_enable     => '1',
+        out_enable     => encdDone,
         constraint_sel => SW,
         encoded_out0   => enOut_0,
         encoded_out1   => enOut_1
@@ -100,17 +103,25 @@ begin
 
         elsif rising_edge(CLK100MHZ) then
             sTxStart <= '0';  -- default low unless triggered
+    
+            txDataBuffer(3) <= '0';
+            txDataBuffer(7) <= '0';
 
             -- When a new byte is received over UART
             if sRxDataRdy = '1' then
-                -- Write 4 bits: original, encoded0, encoded1, zero
-                txDataBuffer(bitIndex + 0) <= sRxData(0);
-                txDataBuffer(bitIndex + 1) <= enOut_0;
-                txDataBuffer(bitIndex + 2) <= enOut_1;
-                txDataBuffer(bitIndex + 3) <= '0';
-
-                bitIndex    <= bitIndex + 4;
+                txDataBuffer(bitIndex) <= sRxData(0);
+            end if;
+            
+            if encdDone = '1' then
+                txDataBuffer(1 + bitIndex) <= enOut_0;
+                txDataBuffer(2 + bitIndex) <= enOut_1;
                 encodeCount <= encodeCount + 1;
+            end if;
+            
+            if encodeCount = 1 then
+                bitIndex <= 4;
+            else
+                bitIndex <= 0;
             end if;
 
             -- When 2 sets of 4 bits have been written, transmit
