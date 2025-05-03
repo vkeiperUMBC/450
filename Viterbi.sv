@@ -87,7 +87,7 @@ end else begin
 if(i3 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i3 <= i3 -1;
-dstring3 <= 3'bx;
+dstring <= 3'bx;
 doneq <= 0;
 
 lowest3 <= lowest3;
@@ -100,7 +100,7 @@ j3 <= 6;
 doneq <= 1;
 m <=0;
 guess3 <= 7'b0000000;
-dstring3 <= lowestString3;
+dstring <= lowestString3;
 end else begin //this is when i = 0, where a new guess string is formed
 CS <= S0;
 i3 <= 2;
@@ -110,6 +110,8 @@ numDifs3 <= 3'b0;
 mstring3 <= 3'b0;
 m <= 0;
 doneq <= 1;
+
+
 if(lowest3 > numDifs3) begin// checks to see if the next string can be saved if the numDifs is lower than the previous saved #
 lowest3 <= numDifs3;
 
@@ -124,12 +126,12 @@ i4 <= 7;
 j4 <= 127;
 doneq <= 0;
 guess4 <= 4'b0000;
-dstring4 <= 4'bx;
+dstring <= 4'bx;
 end else begin
 if(i4 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i4 <= i4 -1;
-dstring4 <= 4'bx;
+dstring <= 4'bx;
 doneq <= 0;
 
 lowest4 <= lowest4;
@@ -142,7 +144,7 @@ j4 <= 15;
 doneq <= 1;
 m<=0;
 guess4 <= 4'b0000;
-dstring4 <= lowestString4;
+dstring <= lowestString4;
 end else begin //this is when i = 0, where a new guess string is formed
 CS <= S0;
 i4 <= 3;
@@ -159,7 +161,7 @@ lowestString4 <= mstring4;
 end
 end
 end
-end
+
 
 end else if (size == 2'b10)begin
 if (rst) begin
@@ -168,12 +170,12 @@ i5 <= 5;
 j5 <= 31;
 doneq <= 0;
 guess5 <= 5'b00000;
-dstring5 <= 5'bx;
+dstring <= 5'bx;
 end else begin
 if(i5 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i5 <= i5 -1;
-dstring5 <= 5'bx;
+dstring <= 5'bx;
 doneq <= 0;
 
 lowest5 <= lowest5;
@@ -186,7 +188,7 @@ j5 <= 30;
 doneq <= 1;
 m<=0;
 guess5 <= 5'b000000;
-dstring5 <= lowestString5;
+dstring <= lowestString5;
 end else begin //this is when i = 0, where a new guess string is formed
 CS <= S0;
 i5 <= 4;
@@ -195,15 +197,15 @@ guess5 <= guess5 + 1;
 numDifs5 <= 5'b0;
 mstring5 <= 5'b0;
 m <= 0;
-doneq5 <= 1;
+doneq <= 1;
 if(lowest5 > numDifs5) begin// checks to see if the next string can be saved if the numDifs is lower than the previous saved #
 lowest5 <= numDifs5;
 
-lowestString5 <= mstring;
+lowestString5 <= mstring5;
 end
 end
 end
-end
+
 
 end else if (size == 2'b11)begin
 if (rst) begin
@@ -212,7 +214,7 @@ i7 <= 7;
 j7 <= 127;
 doneq <= 0;
 guess7 <= 7'b0000000;
-dstring7 <= 7'bx;
+dstring <= 7'bx;
 end else begin
 if(i7 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
@@ -230,7 +232,7 @@ j7 <= 126;
 doneq <= 1;
 m<=0;
 guess7 <= 7'b0000000;
-dstring7 <= lowestString;
+dstring <= lowestString7;
 end else begin //this is when i = 0, where a new guess string is formed
 CS <= S0;
 i7 <= 6;
@@ -247,7 +249,7 @@ lowestString7 <= mstring7;
 end
 end
 end
-end
+
 end else begin
 
 end
@@ -276,11 +278,11 @@ case (CS)
     //finds the lowest number of difference between the two options
     if(option1 < option2) begin
     NS = S1;
-    mstring3[i] = 1;
+    mstring3[i3] = 1;
     numDifs3 = numDifs3 + option1;
     end else if(option2 < option1) begin
     NS = S0;
-    mstring3[i] = 0;
+    mstring3[i3] = 0;
     numDifs3 = numDifs3 + option2;
     end else begin
  
@@ -290,10 +292,10 @@ case (CS)
     m = m + 1;
         if(other == 0) begin
         NS = S1;
-        mstring3[i] = 1;
+        mstring3[i3] = 1;
         end else begin
         NS = S0;
-        mstring3[i] = 0;
+        mstring3[i3] = 0;
      end
     end
     end
@@ -309,11 +311,11 @@ case (CS)
             end
         if(option1 < option2) begin
         NS = S3;
-        mstring3[i] = 1;
+        mstring3[i3] = 1;
         numDifs3 = numDifs3 + option1;
         end else if(option2 < option1) begin
         NS = S2;
-        mstring3[i] = 0;
+        mstring3[i3] = 0;
         numDifs3 = numDifs3 + option2;
         end else begin
         numDifs3 = numDifs3 + option1;
@@ -321,10 +323,10 @@ case (CS)
         m = m + 1;
             if(other == 1) begin
             NS = S3;
-            mstring3[i] = 1;
+            mstring3[i3] = 1;
             end else begin
             NS = S2;
-            mstring3[i] = 0;
+            mstring3[i3] = 0;
          end
         end
            
@@ -339,11 +341,11 @@ case (CS)
         end
     if(option1 < option2) begin
         NS = S0;
-        mstring3[i] = 0;
+        mstring3[i3] = 0;
         numDifs3 = numDifs3 + option1;
             end else if(option2 < option1) begin
             NS = S1;
-            mstring3[i] = 1;
+            mstring3[i3] = 1;
             numDifs3 = numDifs3 + option2;
             end else begin
             other = guess3[m];
@@ -351,10 +353,10 @@ case (CS)
             numDifs3 = numDifs3 + option1;
                 if(other == 1) begin
                 NS = S0;
-                mstring3[i] = 0;
+                mstring3[i3] = 0;
                 end else begin
                 NS = S1;
-                mstring3[i] = 1;
+                mstring3[i3] = 1;
              end
             end
                end
@@ -368,11 +370,11 @@ for(k = 1; k >= 0; k = k - 1) begin
                 end
             if(option1 < option2) begin
             NS = S3;
-            mstring3[i] = 1;
+            mstring3[i3] = 1;
             numDifs3 = numDifs3 + option1;
             end else if(option2 < option1) begin
             NS = S2;
-            mstring3[i] = 0;
+            mstring3[i3] = 0;
             numDifs3 = numDifs3 + option2;
             end else begin
             numDifs3 = numDifs3 + option1;
@@ -380,10 +382,10 @@ for(k = 1; k >= 0; k = k - 1) begin
             m = m + 1;
                 if(other == 1) begin
                 NS = S3;
-                mstring3[i] = 1;
+                mstring3[i3] = 1;
                 end else begin
                 NS = S2;
-                mstring3[i] = 0;
+                mstring3[i3] = 0;
              end
             end
                end
@@ -392,7 +394,7 @@ for(k = 1; k >= 0; k = k - 1) begin
      end 
 endcase
 end
-else if(size == 2'b01)
+else if(size == 2'b01) begin
 option1 = 0;
 option2 = 0;
 two = {rstring[(i4*2)+1], rstring[(i4*2)]};
@@ -411,11 +413,11 @@ case (CS)
     //finds the lowest number of difference between the two options
     if(option1 < option2) begin
     NS = S1;
-    mstring4[i] = 1;
+    mstring4[i4] = 1;
     numDifs4 = numDifs4 + option1;
     end else if(option2 < option1) begin
     NS = S0;
-    mstring4[i] = 0;
+    mstring4[i4] = 0;
     numDifs4 = numDifs4 + option2;
     end else begin
  
@@ -425,10 +427,10 @@ case (CS)
     m = m + 1;
         if(other == 0) begin
         NS = S1;
-        mstring4[i] = 1;
+        mstring4[i4] = 1;
         end else begin
         NS = S0;
-        mstring4[i] = 0;
+        mstring4[i4] = 0;
      end
     end
     end
@@ -444,11 +446,11 @@ case (CS)
             end
         if(option1 < option2) begin
         NS = S3;
-        mstring4[i] = 1;
+        mstring4[i4] = 1;
         numDifs4 = numDifs4 + option1;
         end else if(option2 < option1) begin
         NS = S2;
-        mstring4[i] = 0;
+        mstring4[i4] = 0;
         numDifs4 = numDifs4 + option2;
         end else begin
         numDifs4 = numDifs4 + option1;
@@ -456,10 +458,10 @@ case (CS)
         m = m + 1;
             if(other == 1) begin
             NS = S3;
-            mstring4[i] = 1;
+            mstring4[i4] = 1;
             end else begin
             NS = S2;
-            mstring4[i] = 0;
+            mstring4[i4] = 0;
          end
         end
            
@@ -474,11 +476,11 @@ case (CS)
         end
     if(option1 < option2) begin
         NS = S0;
-        mstring4[i] = 0;
+        mstring4[i4] = 0;
         numDifs4 = numDifs4 + option1;
             end else if(option2 < option1) begin
             NS = S1;
-            mstring4[i] = 1;
+            mstring4[i4] = 1;
             numDifs4 = numDifs4 + option2;
             end else begin
             other = guess4[m];
@@ -486,10 +488,10 @@ case (CS)
             numDifs4 = numDifs4 + option1;
                 if(other == 1) begin
                 NS = S0;
-                mstring4[i] = 0;
+                mstring4[i4] = 0;
                 end else begin
                 NS = S1;
-                mstring4[i] = 1;
+                mstring4[i4] = 1;
              end
             end
                end
@@ -503,11 +505,11 @@ for(k = 1; k >= 0; k = k - 1) begin
                 end
             if(option1 < option2) begin
             NS = S3;
-            mstring4[i] = 1;
+            mstring4[i4] = 1;
             numDifs4 = numDifs4 + option1;
             end else if(option2 < option1) begin
             NS = S2;
-            mstring4[i] = 0;
+            mstring4[i4] = 0;
             numDifs4 = numDifs4 + option2;
             end else begin
             numDifs4 = numDifs4 + option1;
@@ -515,10 +517,10 @@ for(k = 1; k >= 0; k = k - 1) begin
             m = m + 1;
                 if(other == 1) begin
                 NS = S3;
-                mstring4[i] = 1;
+                mstring4[i4] = 1;
                 end else begin
                 NS = S2;
-                mstring4[i] = 0;
+                mstring4[i4] = 0;
              end
             end
                end
@@ -526,7 +528,9 @@ for(k = 1; k >= 0; k = k - 1) begin
 
      end 
 endcase
-end else if (size == 2'b10) begin
+end
+
+else if (size == 2'b10) begin
 option1 = 0;
 option2 = 0;
 two = {rstring[(i5*2)+1], rstring[(i5*2)]};
@@ -544,24 +548,24 @@ case (CS)
     //finds the lowest number of difference between the two options
     if(option1 < option2) begin
     NS = S1;
-    mstring5[i] = 1;
+    mstring5[i5] = 1;
     numDifs5 = numDifs5 + option1;
     end else if(option2 < option1) begin
     NS = S0;
-    mstring5[i] = 0;
+    mstring5[i5] = 0;
     numDifs5 = numDifs5 + option2;
     end else begin
  
  //if there are ties, go to guess to determine path
     numDifs5 = numDifs5 + option1;
-    other = guess[m];
+    other = guess5[m];
     m = m + 1;
         if(other == 0) begin
         NS = S1;
-        mstring5[i] = 1;
+        mstring5[i5] = 1;
         end else begin
         NS = S0;
-        mstring5[i] = 0;
+        mstring5[i5] = 0;
      end
     end
     end
@@ -577,11 +581,11 @@ case (CS)
             end
         if(option1 < option2) begin
         NS = S3;
-        mstring5[i] = 1;
+        mstring5[i5] = 1;
         numDifs5 = numDifs5 + option1;
         end else if(option2 < option1) begin
         NS = S2;
-        mstring5[i] = 0;
+        mstring5[i5] = 0;
         numDifs5 = numDifs5 + option2;
         end else begin
         numDifs5 = numDifs5 + option1;
@@ -589,10 +593,10 @@ case (CS)
         m = m + 1;
             if(other == 1) begin
             NS = S3;
-            mstring5[i] = 1;
+            mstring5[i5] = 1;
             end else begin
             NS = S2;
-            mstring5[i] = 0;
+            mstring5[i5] = 0;
          end
         end
            
@@ -607,22 +611,22 @@ case (CS)
         end
     if(option1 < option2) begin
         NS = S0;
-        mstring5[i] = 0;
+        mstring5[i5] = 0;
         numDifs5 = numDifs5 + option1;
             end else if(option2 < option1) begin
             NS = S1;
-            mstring5[i] = 1;
+            mstring5[i5] = 1;
             numDifs5 = numDifs5 + option2;
             end else begin
-            other = guess[m];
+            other = guess5[m];
             m = m + 1;
             numDifs5 = numDifs5 + option1;
                 if(other == 1) begin
                 NS = S0;
-                mstring5[i] = 0;
+                mstring5[i5] = 0;
                 end else begin
                 NS = S1;
-                mstring5[i] = 1;
+                mstring5[i5] = 1;
              end
             end
                end
@@ -636,22 +640,22 @@ for(k = 1; k >= 0; k = k - 1) begin
                 end
             if(option1 < option2) begin
             NS = S3;
-            mstring5[i] = 1;
+            mstring5[i5] = 1;
             numDifs5 = numDifs5 + option1;
             end else if(option2 < option1) begin
             NS = S2;
-            mstring5[i] = 0;
+            mstring5[i5] = 0;
             numDifs5 = numDifs5 + option2;
             end else begin
             numDifs5 = numDifs5 + option1;
-            other = guess[m];
+            other = guess5[m];
             m = m + 1;
                 if(other == 1) begin
                 NS = S3;
-                mstring5[i] = 1;
+                mstring5[i5] = 1;
                 end else begin
                 NS = S2;
-                mstring5[i] = 0;
+                mstring5[i5] = 0;
              end
             end
                end
@@ -659,7 +663,8 @@ for(k = 1; k >= 0; k = k - 1) begin
 
      end 
 endcase
-end if else (case == 2'b11)
+
+end else if (size == 2'b11) begin
 option1 = 0;
 option2 = 0;
 two = {rstring[(i7*2)+1], rstring[(i7*2)]};
@@ -677,11 +682,11 @@ case (CS)
     //finds the lowest number of difference between the two options
     if(option1 < option2) begin
     NS = S1;
-    mstring7[i] = 1;
+    mstring7[i7] = 1;
     numDifs7 = numDifs7 + option1;
     end else if(option2 < option1) begin
     NS = S0;
-    mstring7[i] = 0;
+    mstring7[i7] = 0;
     numDifs7 = numDifs7 + option2;
     end else begin
  
@@ -691,10 +696,10 @@ case (CS)
     m = m + 1;
         if(other == 0) begin
         NS = S1;
-        mstring7[i] = 1;
+        mstring7[i7] = 1;
         end else begin
         NS = S0;
-        mstring7[i] = 0;
+        mstring7[i7] = 0;
      end
     end
     end
@@ -710,22 +715,22 @@ case (CS)
             end
         if(option1 < option2) begin
         NS = S3;
-        mstring7[i] = 1;
+        mstring7[i7] = 1;
         numDifs7 = numDifs7 + option1;
         end else if(option2 < option1) begin
         NS = S2;
-        mstring7[i] = 0;
+        mstring7[i7] = 0;
         numDifs7 = numDifs7 + option2;
         end else begin
         numDifs7 = numDifs7 + option1;
-        other = guess[m];
+        other = guess7[m];
         m = m + 1;
             if(other == 1) begin
             NS = S3;
-            mstring7[i] = 1;
+            mstring7[i7] = 1;
             end else begin
             NS = S2;
-            mstring7[i] = 0;
+            mstring7[i7] = 0;
          end
         end
            
@@ -740,22 +745,22 @@ case (CS)
         end
     if(option1 < option2) begin
         NS = S0;
-        mstring7[i] = 0;
+        mstring7[i7] = 0;
         numDifs7 = numDifs7 + option1;
             end else if(option2 < option1) begin
             NS = S1;
-            mstring7[i] = 1;
+            mstring7[i7] = 1;
             numDifs7 = numDifs7 + option2;
             end else begin
-            other = guess[m];
+            other = guess7[m];
             m = m + 1;
             numDifs7 = numDifs7 + option1;
                 if(other == 1) begin
                 NS = S0;
-                mstring7[i] = 0;
+                mstring7[i7] = 0;
                 end else begin
                 NS = S1;
-                mstring7[i] = 1;
+                mstring7[i7] = 1;
              end
             end
                end
@@ -769,11 +774,11 @@ for(k = 1; k >= 0; k = k - 1) begin
                 end
             if(option1 < option2) begin
             NS = S3;
-            mstring7[i] = 1;
+            mstring7[i7] = 1;
             numDifs7 = numDifs7 + option1;
             end else if(option2 < option1) begin
             NS = S2;
-            mstring7[i] = 0;
+            mstring7[i7] = 0;
             numDifs7 = numDifs7 + option2;
             end else begin
             numDifs7 = numDifs7 + option1;
@@ -781,10 +786,10 @@ for(k = 1; k >= 0; k = k - 1) begin
             m = m + 1;
                 if(other == 1) begin
                 NS = S3;
-                mstring7[i] = 1;
+                mstring7[i7] = 1;
                 end else begin
                 NS = S2;
-                mstring7[i] = 0;
+                mstring7[i7] = 0;
              end
             end
                end
@@ -794,6 +799,6 @@ for(k = 1; k >= 0; k = k - 1) begin
 endcase
 end
 end
-       
+
 
 endmodule
