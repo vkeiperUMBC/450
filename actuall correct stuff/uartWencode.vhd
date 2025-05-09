@@ -31,11 +31,8 @@ architecture Behavioral of uartWencode is
     signal encodeCount  : integer range 0 to 2 := 0;
     signal bitIndex     : integer range 0 to 7 := 0;
     signal encdDone     : std_logic := '0';
-    signal nbblIndx     : std_logic := '0';
     signal recCheck     : std_logic := '0';
     signal enCheck      : std_logic := '0';
-    signal encdDone_r   : std_logic := '0'; -- registered version of encdDone
-    signal latchReady   : std_logic := '0'; -- flag to delay latching one clock
 
     -- UART component
     component UART is 
@@ -104,14 +101,7 @@ begin
             sTxData      <= (others => '0');
             sTxStart     <= '0';
             encodeCount  <= 0;
-            bitIndex     <= 0;
-            recCheck     <= '0';
-            enCheck      <= '0';
-            encdDone_r   <= '0';
-            latchReady   <= '0';
-
         else
-
             -- When a new byte is received over UART load b0 into tx buffer
             if sRxDataRdy = '1' then
                 sTxData(0) <= sRxData(0);
@@ -121,27 +111,13 @@ begin
                 sTxData(1) <= enOut_0;
                 sTxData(2) <= enOut_1;
             end if;
-        end if;
-    end process;
-
-    -- Process to set output_signal high on falling edge of clock after input_signal goes high
-    process(clk100mhz, btn0)
-        variable input_detected : std_logic := '0';
-    begin
-        if btn0 = '1' then
-            sTxStart <= '0';
-            input_detected := '0';
-        elsif falling_edge(clk100mhz) then
-            if enCheck = '1' then
-                input_detected := '1';
-            end if;
             
-            if input_detected = '1' then
+            if enCheck = '1' then
                 sTxStart <= '1';
-                input_detected := '0';  -- Reset detection for next occurrence
             else
                 sTxStart <= '0';
             end if;
+            
         end if;
     end process;
     
@@ -149,7 +125,6 @@ begin
         variable encdDone_prev : std_logic := '0';
     begin
         if BTN0 = '1' then
-            enCheck <= '0';
             encdDone_prev := '0';
         elsif rising_edge(CLK100MHZ) then
             -- Detect rising edge of encdDone using synchronous logic
@@ -158,11 +133,12 @@ begin
             else
                 enCheck <= '0';
             end if;
-            
             -- Store previous value for edge detection
             encdDone_prev := encdDone;
         end if;
     end process;
+    
+     
     -- Process to handle transmission timing
 end Behavioral;
 

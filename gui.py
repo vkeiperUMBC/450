@@ -172,21 +172,6 @@ class UARTGUI(QWidget):
         # self.decoded_text_area.setTextCursor(cursor)  # Set updated cursor back
         # self.decoded_text_area.ensureCursorVisible()  # Keep cursor visible
 
-    def read_encoded_bits(self):
-        try:
-            with open(self.file_path, "r") as file:
-                file.seek(self.file_cursor)  # Move the cursor to the current position
-                chunk = file.read(1)  # Read the next 8 characters
-                if chunk:
-                    current_text = self.encoded_text_area.toPlainText()
-                    self.encoded_text_area.setPlainText(current_text + chunk)  # Display the chunk in the UI
-                    self.file_cursor = file.tell()  # Update the cursor position
-                else:
-                    self.log_message("End of file reached")
-        except FileNotFoundError:
-            self.log_message(f"File not found: {self.file_path}")
-        except Exception as e:
-            self.log_message(f"Error reading file: {str(e)}")
 
     def clear_text(self):
         self.input_text_area.clear()
@@ -239,16 +224,11 @@ class UARTGUI(QWidget):
         if ser.is_open and ser.in_waiting > 0:  # Check if data is available
             try:
                 data = ser.read(ser.in_waiting)  # Read available data as raw bytes
-                self.bit_buffer += ''.join(format(byte, '08b') for byte in data)  # Convert bytes to raw bits
-
-                # Process the buffer in chunks of 4 bits
-                while len(self.bit_buffer) >= 4:
-                    chunk = self.bit_buffer[:4]  # Take the first 4 bits
-                    self.bit_buffer = self.bit_buffer[4:]  # Remove the processed bits from the buffer
-
-                    # Display the bits in the respective sections
+                # Convert bytes to bits and only take the last 4 bits
+                new_bits = ''.join(format(byte, '08b') for byte in data)
+                if len(new_bits) >= 4:
+                    chunk = new_bits[-4:]  # Take only last 4 bits
                     self.update_ui_with_bits(chunk)
-
             except Exception as e:
                 self.log_message(f"Error reading data: {str(e)}")
 
