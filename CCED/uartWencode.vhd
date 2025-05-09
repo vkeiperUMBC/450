@@ -24,6 +24,7 @@ architecture Behavioral of uartWencode is
     -- Encoder outputs
     signal enOut_0      : std_logic;
     signal enOut_1      : std_logic;
+    signal sEncoderIn   : std_logic := '0';
 
     -- Custom signals
     signal txDataBuffer : std_logic_vector(7 downto 0) := (others => '0');
@@ -33,7 +34,8 @@ architecture Behavioral of uartWencode is
     signal nbblIndx     : std_logic := '0';
     signal recCheck     : std_logic := '0';
     signal enCheck      : std_logic := '0';
-    
+    signal encdDone_r   : std_logic := '0'; -- registered version of encdDone
+    signal latchReady   : std_logic := '0'; -- flag to delay latching one clock
 
     -- UART component
     component UART is 
@@ -83,10 +85,10 @@ begin
     -- Encoder instance
     Encoder0 : encoder
     port map (
-        CLK            => CLK100MHZ,
-        RST            => BTN0,
+        clk            => CLK100MHZ,
+        rst            => BTN0,
         data_in        => sRxData(0),
-        in_enable      => '1',
+        in_enable      => sRxDataRdy,
         out_enable     => encdDone,
         constraint_sel => SW,
         encoded_out0   => enOut_0,
@@ -102,28 +104,44 @@ begin
             sTxStart     <= '0';
             encodeCount  <= 0;
             bitIndex     <= 0;
+            recCheck     <= '0';
+            enCheck      <= '0';
+            encdDone_r   <= '0';
+            latchReady   <= '0';
 
-        elsif rising_edge(CLK100MHZ) then
+        elsif falling_edge(CLK100MHZ) then
             sTxStart <= '0';  -- default low unless triggered
     
             txDataBuffer(3) <= '0';
 
+            -- Register encdDone
+            encdDone_r <= encdDone;
+
             -- When a new byte is received over UART
             if sRxDataRdy = '1' then
-                txDataBuffer(bitIndex) <= sRxData(0);
+                txDataBuffer(0) <= sRxData(0);
+                recCheck <= '1';
             end if;
             
-            if encdDone = '1' then
+            -- Detect rising edge of encdDone
+            if encdDone = '1' and encdDone_r = '0' then
+                latchReady <= '1';  -- set flag to latch next cycle
+            end if;
+            
+            -- Latch outputs one cycle after encdDone rises
+            if latchReady = '1' then
+                latchReady <= '0'; -- clear flag after latching
                 txDataBuffer(1) <= enOut_0;
                 txDataBuffer(2) <= enOut_1;
+                enCheck <= '1';
             end if;
             
+            -- Transmit if both reception and encoding done
             if recCheck = '1' and enCheck = '1' then
                 recCheck <= '0';
                 enCheck <= '0';
                 sTxStart <= '1';
             end if; 
-            
         end if;
     end process;
 
