@@ -21,7 +21,14 @@ initial begin
 
 initial begin
 size = 2'b11;
-rstring = 14'b001101101010;
+rstring = 14'b11111001101011;
 $monitor("dstring is %0b", dstring);
+@(posedge clk);
+@(posedge clk);
+@(posedge clk);
+@(posedge clk);
+@(posedge clk);
+size = 2'b00;
+rstring = 6'b111111;
 end
 endmodule
