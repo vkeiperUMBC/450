@@ -8,11 +8,13 @@ constraint lengths to decode
 
 
 
+
 module decoder(
 input logic [13:0] rstring,//the input string
 input logic clk,//the clock
 input logic rst,//the reset
 input logic [2:0] size, //the size of the input string
+input logic enable,
 output logic [6:0] dstring,//the output string
 output logic done //signal saying it is done decoding
 );
@@ -21,6 +23,8 @@ output logic done //signal saying it is done decoding
 //trackers signifies if the decoding is done
 logic doneq = 0;
 assign done = doneq;
+logic [1:0] prevS; //previous size
+logic [13:0] inputString;
 
 //7 tracker (11)
 logic [6:0] lowest7 = 7'b1111111; //the lowest number of differences
@@ -86,13 +90,45 @@ logic [1:0] NS;// the next state
 
 //state machine
 localparam [1:0] S0 = 2'b00, S1 = 2'b10, S2 = 2'b01, S3 = 2'b11;
-logic two [1:0];// used in getting two bits from rstring
+logic two [1:0];// used in getting two bits from inputString
 logic [1:0] CS = S0;//current state
 
 //FlipFlop
-always_ff @ (posedge clk or posedge rst) begin
+always_ff @ (posedge clk or posedge rst or posedge enable) begin
+if(enable) begin
+if(j7 == 126 || j5 == 32 || j4 == 16 || j3 == 8) begin
+inputString <= rstring;
+end
+
+if(prevS != size) begin
+inputString <= rstring;
+CS <= S0;
+i3 <= 3;
+j3 <= 8;
+doneq <= 0;
+guess3 <= 3'b000;
+
+i4 <= 4;
+j4 <= 16;
+doneq <= 0;
+guess4 <= 4'b0000;
+
+i5 <= 5;
+j5 <= 25;
+doneq <= 0;
+guess5 <= 5'b0000;
+
+i7 <= 7;
+j7 <= 126;
+doneq <= 0;
+guess7 <= 7'b0000000;
+
+
+dstring <= 7'bx;
+end
+
 //checks to detect certain bit string, will be removed from final product
-if(size == 2'b00)begin
+else if(size == 2'b00)begin
 if (rst) begin
 CS <= S0;
 i3 <= 3;
@@ -281,10 +317,16 @@ end
 
 end
 end
+prevS <= size;
+
+end else begin
+dstring = 7'bx;
+end
 end
 //Changes and determines next state
-always_comb begin 
-if(i7 == 6 || i5 == 6 || i3 == 6 || i4 == 6) begin
+always_comb begin
+ 
+if(i7 == 6 || i5 == 4 || i3 == 2 || i4 == 3) begin
 numDifs3Q = 3'b000;
 numDifs4Q = 4'b0000;
 numDifs5Q = 5'b00000;
@@ -297,13 +339,16 @@ mstring7Q = 7'b0000000;
 mQ = 1'b0;
 end
 
+
+
+
 if(size == 2'b00)begin
 
 
 
 option1 = 0;
 option2 = 0;
-two = {rstring[(i3*2)+1], rstring[(i3*2)]};
+two = {inputString[(i3*2)+1], inputString[(i3*2)]};
 case (CS)
     S0 : begin //the first state
 
@@ -438,7 +483,7 @@ end
 else if(size == 2'b01) begin
 option1 = 0;
 option2 = 0;
-two = {rstring[(i4*2)+1], rstring[(i4*2)]};
+two = {inputString[(i4*2)+1], inputString[(i4*2)]};
 
 case (CS)
     S0 : begin //the first state
@@ -574,7 +619,7 @@ end
 else if (size == 2'b10) begin
 option1 = 0;
 option2 = 0;
-two = {rstring[(i5*2)+1], rstring[(i5*2)]};
+two = {inputString[(i5*2)+1], inputString[(i5*2)]};
 case (CS)
     S0 : begin //the first state
 
@@ -708,7 +753,7 @@ endcase
 end else if (size == 2'b11) begin
 option1 = 0;
 option2 = 0;
-two = {rstring[(i7*2)+1], rstring[(i7*2)]};
+two = {inputString[(i7*2)+1], inputString[(i7*2)]};
 case (CS)
     S0 : begin //the first state
 
