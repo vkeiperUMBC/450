@@ -23,8 +23,16 @@ initial begin
 
 initial begin
 enable = 1'b1;
-size = 2'b11;
-rstring = 14'b11111001101011;
+size = 2'b10;
+rstring = 10'b1101101010;
+
+@(posedge clk);
+@(posedge clk);
+@(posedge clk);
+
+enable = 1'b1;
+size = 2'b01;
+rstring = 8'b11010110;
 
 end
 endmodule
