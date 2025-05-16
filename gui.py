@@ -250,11 +250,11 @@ class UARTGUI(QWidget):
 
             # Next 2 bits to the "Encoded" section
             current_encoded = self.encoded_text_area.toPlainText()
-            self.encoded_text_area.setPlainText(current_encoded + chunk[1] + chunk[2])
+            self.encoded_text_area.setPlainText(current_encoded + chunk[2] + chunk[1])
 
             # Last bit to the "Decoded" section
             current_decoded = self.decoded_text_area.toPlainText()
-            self.decoded_text_area.setPlainText(current_decoded + chunk[0])
+            self.decoded_text_area.setPlainText(current_decoded + chunk[3])
 
     def eventFilter(self, source, event):
         if event.type() == QEvent.MouseButtonPress and source == self.port_combobox:

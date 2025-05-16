@@ -33,6 +33,10 @@ architecture Behavioral of uartWencode is
     signal encdDone     : std_logic := '0';
     signal recCheck     : std_logic := '0';
     signal enCheck      : std_logic := '0';
+    signal decdIn       : std_logic_vector(13 downto 0);
+    signal decdOut      : std_logic_vector(6 downto 0);
+    signal dcSz         : std_logic_vector(2 downto 0);
+    signal dcDone       : std_logic;
 
     -- UART component
     component UART is 
@@ -60,6 +64,17 @@ architecture Behavioral of uartWencode is
             constraint_sel : in  std_logic_vector(1 downto 0);
             encoded_out0   : out std_logic;
             encoded_out1   : out std_logic
+        );
+    end component;
+    
+    component decoder is
+    port(
+        rstring     : in std_logic_vector(13 downto 0);
+        CLK         : in std_logic;
+        RST         : in std_logic;
+        size        : in std_logic_vector(2 downto 0);
+        dstring     : out std_logic_vector(6 downto 0);
+        done        : out std_logic
         );
     end component;
 
@@ -92,6 +107,15 @@ begin
         encoded_out1   => enOut_1
     );
 
+    decoder0: decoder
+    port map(
+        rstring => decdIn, -- expects double the size
+        CLK     => CLK100MHZ,
+        RST     => BTN0,
+        size    => dcSz, -- 00=3, 01=4, 10=5, 11=7
+        dstring => decdOut,
+        done    => dcDone
+    );
 
     -- process to handle loading into the tx buffer
     process(CLK100MHZ, BTN0)
@@ -138,8 +162,15 @@ begin
         end if;
     end process;
     
+    process(CLK100MHZ, BTN0)
+        variable cnstrnt : natural range 0 to 7;
+    begin
+    
+        if 
+        
+    
+    end process;
+    
      
     -- Process to handle transmission timing
 end Behavioral;
-
-
