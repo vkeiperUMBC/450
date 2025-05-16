@@ -17,7 +17,6 @@ class UARTGUI(QWidget):
         self.setup_ui()
         self.serial_port = None
         self.timer = QTimer(self)  # Timer for generating bitstream
-        self.timer.timeout.connect(self.generate_random_bitstream)
         self.receive_timer = QTimer(self)  # Timer for listening to incoming data
         self.receive_timer.timeout.connect(self.listen_for_data)  # Connect to the listening function
         self.file_cursor = 0  # Initialize the cursor position
@@ -149,28 +148,6 @@ class UARTGUI(QWidget):
             
     def stop_bitstream_generation(self):
         self.timer.stop()  # Stop the timer
-
-    def generate_random_bitstream(self):
-        new_bit = random.choice('01')  # Generate a single random bit
-        ser.write(new_bit.encode())  # Send the bit over UART
-        bitstream = ''.join(new_bit)  # Generate a single random bit
-        current_text_input = self.input_text_area.toPlainText()
-        self.input_text_area.setPlainText(current_text_input + bitstream)  # Append new bitstream to the input area
-
-        # # Simulate decoding with possible error
-        # decoded_bit = bitstream
-        # if random.randrange(0, 99) > 90:  # Introduce an error with 10% probability
-        #     decoded_bit = '0' if bitstream == '1' else '1'
-
-        # # Update decoded text with highlighting
-        # cursor = self.decoded_text_area.textCursor()
-        # cursor.movePosition(cursor.End)  # Move cursor to the end of text
-        # if decoded_bit != bitstream:
-        #     cursor.insertHtml(f'<span style="color:red;">{decoded_bit}</span>')  # Highlight mismatch in red
-        # else:
-        #     cursor.insertHtml(f'<span style="color:white;">{decoded_bit}</span>')  # Append matching bit in white
-        # self.decoded_text_area.setTextCursor(cursor)  # Set updated cursor back
-        # self.decoded_text_area.ensureCursorVisible()  # Keep cursor visible
 
 
     def clear_text(self):

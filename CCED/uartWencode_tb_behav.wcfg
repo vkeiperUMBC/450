@@ -13,11 +13,11 @@
    <zoom_setting>
       <ZoomStartTime time="0.000000 us"></ZoomStartTime>
       <ZoomEndTime time="3,501.000001 us"></ZoomEndTime>
-      <Cursor1Time time="2,100.600000 us"></Cursor1Time>
+      <Cursor1Time time="3,501.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="124"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <ValueColumnWidth column_width="69"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="13" />
    <wvobject fp_name="/uartWencode_tb/clk" type="logic">
@@ -52,21 +52,21 @@
       <obj_property name="ElementShortName">BIT_PERIOD</obj_property>
       <obj_property name="ObjectShortName">BIT_PERIOD</obj_property>
    </wvobject>
-   <wvobject fp_name="/uartWencode_tb/uut/Encoder/in_enable" type="logic">
-      <obj_property name="ElementShortName">in_enable</obj_property>
-      <obj_property name="ObjectShortName">in_enable</obj_property>
-   </wvobject>
-   <wvobject fp_name="/uartWencode_tb/uut/Encoder/data_in" type="logic">
-      <obj_property name="ElementShortName">data_in</obj_property>
-      <obj_property name="ObjectShortName">data_in</obj_property>
-   </wvobject>
-   <wvobject fp_name="/uartWencode_tb/uut/Encoder/encoded_out0" type="logic">
+   <wvobject fp_name="/uartWencode_tb/uut/Encoder0/encoded_out0" type="logic">
       <obj_property name="ElementShortName">encoded_out0</obj_property>
       <obj_property name="ObjectShortName">encoded_out0</obj_property>
    </wvobject>
-   <wvobject fp_name="/uartWencode_tb/uut/Encoder/encoded_out1" type="logic">
+   <wvobject fp_name="/uartWencode_tb/uut/Encoder0/encoded_out1" type="logic">
       <obj_property name="ElementShortName">encoded_out1</obj_property>
       <obj_property name="ObjectShortName">encoded_out1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uartWencode_tb/uut/Encoder0/in_enable" type="logic">
+      <obj_property name="ElementShortName">in_enable</obj_property>
+      <obj_property name="ObjectShortName">in_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/uartWencode_tb/uut/sRxDataRdy" type="logic">
+      <obj_property name="ElementShortName">sRxDataRdy</obj_property>
+      <obj_property name="ObjectShortName">sRxDataRdy</obj_property>
    </wvobject>
    <wvobject fp_name="/uartWencode_tb/uut/txDataBuffer" type="array">
       <obj_property name="ElementShortName">txDataBuffer[7:0]</obj_property>
