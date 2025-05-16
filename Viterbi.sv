@@ -77,7 +77,7 @@ logic [2:0] numDifs3Q = 3'b0;//number of differences per round
 logic [2:0] mstring3Q =3'b0;//string that is temporary
 
 
-
+logic [1:0] savedSize = 2'b00;
 
 int option1;//option to go down path 1
 int option2;//option to go down path 2
@@ -96,8 +96,9 @@ logic [1:0] CS = S0;//current state
 //FlipFlop
 always_ff @ (posedge clk or posedge rst or posedge enable) begin
 if(enable) begin
-if(j7 == 126 || j5 == 32 || j4 == 16 || j3 == 8) begin
+if((j7 >= 126 && savedSize == 2'b11)|| (j5 >= 31 && savedSize == 2'b10)|| (savedSize == 2'b01 && j4 >= 15) || (savedSize == 2'b00 && j3 >= 7)) begin
 inputString <= rstring;
+savedSize <= size;
 end
 
 if(prevS != size) begin
@@ -128,7 +129,7 @@ dstring <= 7'bx;
 end
 
 //checks to detect certain bit string, will be removed from final product
-else if(size == 2'b00)begin
+else if(savedSize == 2'b00)begin
 if (rst) begin
 CS <= S0;
 i3 <= 3;
@@ -150,6 +151,7 @@ lowest3 <= numDifs3Q;
 
 lowestString3 <= mstring3Q;
 end
+lowest3 <= 3'b111;
 end else if(i3 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i3 <= i3 -1;
@@ -173,8 +175,9 @@ lowest3 <= numDifs3Q;
 
 lowestString3 <= mstring3Q;
 end
+
 end 
-end else if (size == 2'b01)begin
+end else if (savedSize == 2'b01)begin
 if (rst) begin
 CS <= S0;
 i4 <= 4;
@@ -196,6 +199,7 @@ lowest4 <= numDifs4Q;
 
 lowestString4 <= mstring4Q;
 end
+lowest4 <= 4'b1111;
 end else if(i4 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i4 <= i4 -1;
@@ -221,7 +225,7 @@ lowestString4 <= mstring4Q;
 end
 
 end
-end else if (size == 2'b10)begin
+end else if (savedSize == 2'b10)begin
 if (rst) begin
 CS <= S0;
 i5 <= 5;
@@ -243,6 +247,7 @@ lowest5 <= numDifs5Q;
 
 lowestString5 <= mstring5Q;
 end
+lowest5 <= 5'b11111;
 end else if(i5 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i5 <= i5 -1;
@@ -266,9 +271,10 @@ lowest5 <= numDifs5Q;
 
 lowestString5 <= mstring5Q;
 end
+
 end
 
-end else if (size == 2'b11)begin
+end else if (savedSize == 2'b11)begin
 if (rst) begin
 CS <= S0;
 i7 <= 7;
@@ -290,6 +296,7 @@ lowest7 <= numDifs7Q;
 
 lowestString7 <= mstring7Q;
 end
+lowest7 <= 7'b1111111;
 end else if(i7 > 0) begin //counts down i to zero, saves variables as to not reset them
 CS <= NS;
 i7 <= i7 -1;
@@ -316,8 +323,9 @@ end
 
 
 end
+
 end
-prevS <= size;
+prevS <= savedSize;
 
 end else begin
 dstring = 7'bx;
@@ -342,7 +350,7 @@ end
 
 
 
-if(size == 2'b00)begin
+if(savedSize == 2'b00)begin
 
 
 
@@ -480,7 +488,7 @@ for(k = 1; k >= 0; k = k - 1) begin
 endcase
 end
 
-else if(size == 2'b01) begin
+else if(savedSize == 2'b01) begin
 option1 = 0;
 option2 = 0;
 two = {inputString[(i4*2)+1], inputString[(i4*2)]};
@@ -616,7 +624,7 @@ for(k = 1; k >= 0; k = k - 1) begin
 endcase
 end
 
-else if (size == 2'b10) begin
+else if (savedSize == 2'b10) begin
 option1 = 0;
 option2 = 0;
 two = {inputString[(i5*2)+1], inputString[(i5*2)]};
@@ -750,7 +758,7 @@ for(k = 1; k >= 0; k = k - 1) begin
      end 
 endcase
 
-end else if (size == 2'b11) begin
+end else if (savedSize == 2'b11) begin
 option1 = 0;
 option2 = 0;
 two = {inputString[(i7*2)+1], inputString[(i7*2)]};
